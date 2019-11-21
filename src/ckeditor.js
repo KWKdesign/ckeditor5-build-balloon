@@ -66,11 +66,9 @@ BalloonEditor.defaultConfig = {
 			'bold',
 			'italic',
 			'link',
+			'code',
 			'bulletedList',
 			'numberedList',
-			'|',
-			'indent',
-			'outdent',
 			'|',
 			'imageUpload',
 			'blockQuote',
@@ -81,9 +79,11 @@ BalloonEditor.defaultConfig = {
 		]
 	},
 	image: {
+		styles: [ 'full', 'alignLeft', 'alignRight' ],
 		toolbar: [
+			'imageStyle:alignLeft',
 			'imageStyle:full',
-			'imageStyle:side',
+			'imageStyle:alignRight',
 			'|',
 			'imageTextAlternative'
 		]

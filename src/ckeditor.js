@@ -30,6 +30,27 @@ import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefrom
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 
+import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+class PrePlugin extends Plugin {
+	init() {
+		const editor = this.editor;
+		const schema = editor.model.schema;
+		const conversion = editor.conversion;
+
+		schema.register( 'codeBlock', {
+			allowWhere: '$block',
+			isBlock: true
+		} );
+
+		schema.extend( '$text', { allowIn: 'codeBlock' } );
+
+		conversion.elementToElement( {
+			model: 'codeBlock',
+			view: 'pre'
+		} );
+	}
+}
+
 export default class BalloonEditor extends BalloonEditorBase {}
 
 // Plugins to include in the build.
@@ -57,6 +78,7 @@ BalloonEditor.builtinPlugins = [
 	Table,
 	TableToolbar,
 	Code,
+	PrePlugin,
 ];
 
 // Editor configuration.
@@ -69,6 +91,7 @@ BalloonEditor.defaultConfig = {
 			'italic',
 			'link',
 			'code',
+			'codeBlock',
 			'bulletedList',
 			'numberedList',
 			'|',
